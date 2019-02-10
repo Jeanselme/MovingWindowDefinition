@@ -28,7 +28,7 @@ for event in semi:
     plt.plot([event["begin"], event["end"]], [0.4,0.4], alpha=event["density"], color="green")
 
 
-minl = verifyDef(data, duty_cycle = 0.5, min_length = 3, max_gap = 5)
+minl = verifyDef(data, duty_cycle = 0.5, min_length = 3, max_gap = 5, only_first= True)
 for event in minl:
     plt.scatter([event["begin"], event["end"]], [0.6,0.6], color="black")
     plt.plot([event["begin"], event["end"]], [0.6,0.6], alpha=event["density"], color="black")

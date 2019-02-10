@@ -22,16 +22,6 @@ def verifyDef(booleanTS, duty_cycle = 1, min_length = 0, max_gap = 0):
         Returns:
             List of (begin_time, end_time, duty_cycle)
     """
-    # Verify the coherence of the criterion
-    assert max_gap < len(booleanTS)
-    assert min_length < len(booleanTS)
-
-    # Force the values to be coherent
-    if duty_cycle == 1:
-        max_gap = 0
-    if max_gap == 0:
-        duty_cycle = 1
-
     # Sort index
     booleanTS.sort_index()
 

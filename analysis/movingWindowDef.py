@@ -3,7 +3,8 @@
 """
 import numpy as np
 
-def verifyDef(booleanTS, duty_cycle = 1, min_length = 0, max_gap = 0, only_first = False):
+def verifyDef(booleanTS, duty_cycle = 1, min_length = 0, max_gap = 0, 
+    only_first = False, real_setting = False):
     """
         Computes the longest period of contiguous (repecting the different criteria)
         of True in the boolean TS
@@ -20,6 +21,7 @@ def verifyDef(booleanTS, duty_cycle = 1, min_length = 0, max_gap = 0, only_first
             NB: Max_gap and min_length are dependent on the unit of the data
 
             only_first {bool} -- Stop after the first event (default: {False})
+            real_setting {bool} -- Stop the current alert if the duty cycle is no longer observed (suboptimal but realistic)
 
         Returns:
             List of (begin_time, end_time, duty_cycle)
@@ -54,7 +56,8 @@ def verifyDef(booleanTS, duty_cycle = 1, min_length = 0, max_gap = 0, only_first
             # Point is negative
             if end is None:
                 pass
-            elif (booleanTS.index[i] - booleanTS.index[end]) >= max_gap:
+            elif ((booleanTS.index[i] - booleanTS.index[end]) >= max_gap) or \
+                (real_setting and (dens_time <= duty_cycle)):
                 # Restart at the last end
                 i = end
 
